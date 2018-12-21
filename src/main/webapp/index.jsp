@@ -48,7 +48,25 @@
 <a href="Controller/testI18n">testI18n</a>
 <br/>
 
+<br/>
+<a href="Controller/project">index.jsp------>home.jsp</a>
+<br/>
+<br/>
 
+<%--要么input中的name和控制器里面的参数一样;要么就要在控制器方法参数中添加@RequestParam()--%>
+<form action="Controller/testConverter" method="post">
+    学生信息:<input name="studentInfo" type="text"/><!-- 2-zs-23  -->
+    <input type="submit" value="提交转换">
+</form>
+<br/>
+<br/>
+
+<form action="Controller/testDateTimeFormat" method="post">
+    IdNumber:<input name="id" type="text" value="31"/><br/>
+    UserName:<input name="name" type="text"/><br/>
+    Birthday:<input name="birthday" type="text"/><br/>
+    <input type="submit" value="提交修改">
+</form>
 
 </body>
 </html>

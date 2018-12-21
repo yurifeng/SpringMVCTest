@@ -1,9 +1,13 @@
 package org.yuri.test.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.yuri.test.entity.Student;
+
+import java.util.Map;
 
 /**
  * @author yurifeng
@@ -109,12 +113,48 @@ public class HomeController {
 
     /**
      * 国际化操作
+     *
      * @return
      */
     @RequestMapping(value = "testI18n")
     public String testI18n() {
-        return "home";
+        return "redirect:/view/home.jsp";//forward和redirect需要手动写上[相对路径]
     }
 
 
+    /**
+     * 前端输入和springmvc的类型转换
+     *
+     * @param student
+     * @return
+     */
+    @RequestMapping(value = "testConverter")
+    public String testConverter(@RequestParam("studentInfo") Student student) {
+        System.out.println(student.getId() + "," + student.getName() + "," + student.getAge());
+        return "home";
+    }
+
+    /**
+     * 日期类型转换
+     *
+     * @param student
+     * @param bindingResult
+     * @param map           map集合的范围存在于request中
+     * @return
+     */
+    @RequestMapping(value = "testDateTimeFormat")
+    public String testDateTimeFormat(Student student, BindingResult bindingResult, Map<String, Object> map) {
+        /*BindingResult校验必须在出错的类型参数后面*/
+        /*如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。*/
+        System.out.println(student.getId() + "---->"
+                + student.getName() + "---->"
+                + student.getBirthday());
+        if (bindingResult.getErrorCount() > 0) {
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                System.out.println(error.getDefaultMessage());
+                map.put("errors", bindingResult.getFieldErrors());
+            }
+        }
+        return "home";
+    }
 }

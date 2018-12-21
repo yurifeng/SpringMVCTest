@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="org.yuri.test.controller"></context:component-scan>
 
@@ -17,5 +18,30 @@
         <property name="basename" value="i18n"></property>
     </bean>
 
+    <!--通过配置此项,控制器中的方法可免去-->
+    <mvc:view-controller path="Controller/project" view-name="home"></mvc:view-controller>
+
+    <!--配置@RequestMapping注解和<mvc:view-controller>共存-->
+    <!--该配置是mvc的基础配置,必须要配置-->
+    <!--同时也是JSR303校验能够使用的基础(配置此项可以实现JSR303校验)-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--静态资源默认servlet处理-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
+    <!--将自定义的转换器加入IOC容器-->
+    <bean id="myConverter" class="org.yuri.test.converter.MyConverter"></bean>
+
+    <!-- 将conversionService注册到annotation-driven中 -->
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+
+    <!--FormattingConversionServiceFactoryBean该类型既可以处理[自定义类型转换],也可以处理[格式化]-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myConverter"></ref>
+            </set>
+        </property>
+    </bean>
 
 </beans>
