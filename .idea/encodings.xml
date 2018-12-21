@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org.yuri.test/reosurces/i18n.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org.yuri.test/reosurces/i18n_en_US.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org.yuri.test/reosurces/i18n_zh_CN.properties" charset="GBK" />
+  </component>
+</project>
