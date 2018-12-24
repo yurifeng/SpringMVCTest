@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.yuri.test.entity.Student;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -143,7 +144,7 @@ public class HomeController {
      * @return
      */
     @RequestMapping(value = "testDateTimeFormat")
-    public String testDateTimeFormat(Student student, BindingResult bindingResult, Map<String, Object> map) {
+    public String testDateTimeFormat(@Valid Student student, BindingResult bindingResult, Map<String, Object> map) {
         /*BindingResult校验必须在出错的类型参数后面*/
         /*如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。*/
         System.out.println(student.getId() + "---->"
