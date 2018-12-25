@@ -184,4 +184,10 @@ public class HomeController {
         System.out.println("upload done.....");
         return "home";
     }
+
+    @RequestMapping("testInterceptor")
+    public String testInterceptor() {
+        System.out.println("拦截器控制器代码");
+        return "home";
+    }
 }

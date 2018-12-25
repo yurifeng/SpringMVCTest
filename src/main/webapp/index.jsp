@@ -101,9 +101,13 @@
 <form action="Controller/testUpload" method="post" enctype="multipart/form-data">
     <input type="file" name="file"><br/>
     Description:<input name="desc" type="text"/><br/>
-
     <input type="submit" value="提交修改">
 </form>
+<br/>
+<br/>
+<br/>
+
+<a href="Controller/testInterceptor">interceptor....</a>
 
 </body>
 </html>
