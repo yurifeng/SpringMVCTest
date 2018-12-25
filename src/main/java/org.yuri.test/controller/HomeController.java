@@ -1,13 +1,16 @@
 package org.yuri.test.controller;
 
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.yuri.test.entity.Student;
 
 import javax.validation.Valid;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -156,6 +159,29 @@ public class HomeController {
                 map.put("errors", bindingResult.getFieldErrors());
             }
         }
+        return "home";
+    }
+
+
+    /**
+     * 文件上传处理方法
+     *
+     * @return
+     */
+    @RequestMapping(value = "testUpload")
+    public String testUpload(@RequestParam("desc") String desc, @RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("信息:----->" + desc);
+        InputStream inputStream = file.getInputStream();
+        String filename = file.getOriginalFilename();
+        OutputStream outputStream = new FileOutputStream("E:\\" + filename);
+        byte[] bytes = new byte[1024];
+        int len = -1;
+        while ((len = inputStream.read(bytes)) != -1) {
+            outputStream.write(bytes, 0, len);
+        }
+        outputStream.close();
+        inputStream.close();
+        System.out.println("upload done.....");
         return "home";
     }
 }

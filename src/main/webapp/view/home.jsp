@@ -10,8 +10,6 @@
 <body>
 
 
-
-
 <fmt:message key="resource.welcome"></fmt:message>
 <br/>
 <p>org.springframework.web.servlet.DispatcherServlet</p>

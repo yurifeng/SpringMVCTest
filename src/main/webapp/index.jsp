@@ -1,8 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
+<head>
+    <title>HOMEPAGE</title>
+    <script src="js/jquery-1.8.3.js"/>
+    <script>
+        $(document).ready(function () {
+            $("#testJson").click(function () {
+                //通过ajax请求springmvc
+                $.post(
+                    "handler/testJson",//服务器地址
+                    //{"name":"zs","age":23}
+                    function (result) {//服务端处理完毕后的回调函数 List<Student> students，
+                        // 加上@ResponseBody后， students实质是一个json数组的格式
+                        for (var i = 0; i < result.length; i++) {
+                            alert(result[i].id + "-" + result[i].name + "-" + result[i].age);
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+
+</head>
 <body>
 <h2>SpringMVC project</h2>
 <hr/>
+
+<input type="button" value="testJson" id="testJson">
+<br/>
+
 <a href="Controller/welcome">welcome..</a>
 <br/>
 <br/>
@@ -65,6 +91,17 @@
     IdNumber:<input name="id" type="text" value="31"/><br/>
     UserName:<input name="name" type="text"/><br/>
     Birthday:<input name="birthday" type="text"/><br/>
+    <input type="submit" value="提交修改">
+</form>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<form action="Controller/testUpload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"><br/>
+    Description:<input name="desc" type="text"/><br/>
+
     <input type="submit" value="提交修改">
 </form>
 
